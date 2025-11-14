@@ -1,0 +1,337 @@
+═══════════════════════════════════════════════════════════
+   FACTIS - Guide de test de l'application
+═══════════════════════════════════════════════════════════
+
+🧪 TESTS À EFFECTUER AVANT MISE EN PRODUCTION
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 1 : Démarrage de l'application
+═══════════════════════════════════════════════════════════
+
+1. Double-cliquer sur index.html
+2. Vérifier que la page d'accueil s'affiche
+3. Vérifier que le logo "FACTIS" est visible
+4. Vérifier que les 4 cartes sont visibles :
+   - Outils de calcul
+   - Leçons de couverture
+   - Catalogue de tuiles
+   - Nous soutenir
+
+✅ RÉSULTAT ATTENDU : Page d'accueil complète et fonctionnelle
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 2 : Mode sombre/clair
+═══════════════════════════════════════════════════════════
+
+1. Cliquer sur l'icône Lune (en haut à droite)
+2. Vérifier que le fond devient sombre
+3. Cliquer sur l'icône Soleil
+4. Vérifier que le fond redevient clair
+5. Recharger la page (F5)
+6. Vérifier que le mode est conservé
+
+✅ RÉSULTAT ATTENDU : Mode sombre fonctionne et persiste
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 3 : Navigation
+═══════════════════════════════════════════════════════════
+
+1. Cliquer sur "Outils de calcul"
+2. Vérifier que le menu des outils s'affiche
+3. Cliquer sur "Retour à l'accueil"
+4. Vérifier le retour à la page d'accueil
+5. Tester les autres menus (Leçons, Catalogue, Soutenir)
+
+✅ RÉSULTAT ATTENDU : Navigation fluide entre toutes les pages
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 4 : Ajouter une tuile personnalisée
+═══════════════════════════════════════════════════════════
+
+1. Accueil → Outils de calcul → Calculateur de pureau
+2. Cliquer sur "Ajouter une tuile"
+3. Remplir le formulaire :
+   - Nom : "Tuile Test"
+   - Marque : "Test SA"
+   - Type : "Faible galbe"
+   - Pureau min : 35
+   - Pureau max : 44
+   - Pureau départ : 33
+   - Espace faîtage : 15
+4. Cliquer sur "Ajouter"
+5. Vérifier l'alerte de succès
+6. Vérifier que la tuile apparaît dans "Mes tuiles"
+
+✅ RÉSULTAT ATTENDU : Tuile ajoutée et visible
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 5 : Calculateur - Mode NORMAL
+═══════════════════════════════════════════════════════════
+
+1. Menu calculateur → "Lancer le calculateur"
+2. Remplir le formulaire :
+   - Nom chantier : "Test Normal"
+   - Rampant 1 : 400 cm
+   - Rampant 2 : 450 cm
+   - Premier rang R1 : 33 cm
+   - Premier rang R2 : 33 cm
+   - Espace faîtage R1 : 15 cm
+   - Espace faîtage R2 : 15 cm
+   - Pureau min : 35 cm
+   - Pureau max : 44 cm
+3. Cliquer sur "Calculer"
+4. Vérifier l'affichage des résultats :
+   - Nombre de rangs (pour chaque rampant)
+   - Pureau calculé
+   - Traçage avec cotes
+5. Vérifier qu'il n'y a PAS d'alerte "hors pureau"
+
+✅ RÉSULTAT ATTENDU : 
+   - R1 : 9 rangs, pureau ~39 cm
+   - R2 : 9 rangs, pureau ~44.67 cm
+   (ou proche selon l'algorithme)
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 6 : Calculateur - Mode HORS PUREAU
+═══════════════════════════════════════════════════════════
+
+1. Dans le calculateur, modifier :
+   - Rampant 1 : 300 cm
+   - Rampant 2 : 500 cm
+   - Pureau min : 40 cm
+   - Pureau max : 42 cm
+2. Cliquer sur "Calculer"
+3. Vérifier l'alerte orange "⚠️ Configuration hors pureau"
+4. Vérifier que les 2 rampants ont un nombre de rangs DIFFÉRENT
+5. Vérifier la présence de "Détail des rangs"
+
+✅ RÉSULTAT ATTENDU : Mode hors pureau activé, rangs différents
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 7 : Lecture vocale (nécessite micro)
+═══════════════════════════════════════════════════════════
+
+1. Après un calcul, cliquer sur "Lire" (Rampant 1)
+2. Vérifier que la voix lit la première cote
+3. Dire "suivant" dans le micro
+4. Vérifier que la voix lit la cote suivante
+5. Dire "répète"
+6. Vérifier que la cote est répétée
+7. Dire "stop"
+8. Vérifier que la lecture s'arrête
+
+⚠️ SI PAS DE MICRO : Cliquer sur "Arrêter" pour tester le bouton
+
+✅ RÉSULTAT ATTENDU : 
+   - Lecture vocale fonctionne
+   - Commandes vocales reconnues
+   - Bouton "Arrêter" fonctionne
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 8 : Sauvegarde de chantier
+═══════════════════════════════════════════════════════════
+
+1. Après un calcul, cliquer sur "Sauvegarder ce chantier"
+2. Vérifier l'alerte de succès
+3. Retour au menu outils
+4. Cliquer sur "Chantiers sauvegardés"
+5. Vérifier que le chantier apparaît
+6. Cliquer sur "Reprendre ce chantier"
+7. Vérifier que le formulaire est pré-rempli
+
+✅ RÉSULTAT ATTENDU : Chantier sauvegardé et rechargeable
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 9 : Conversion degré ↔ pourcentage
+═══════════════════════════════════════════════════════════
+
+1. Menu outils → "Calcul degré en pourcentage"
+2. Entrer 45° dans le champ "Degrés"
+3. Vérifier que le pourcentage s'affiche (~100%)
+4. Entrer 100 dans le champ "Pourcentage"
+5. Vérifier que les degrés s'affichent (~45°)
+
+✅ RÉSULTAT ATTENDU : 
+   - 45° = 100%
+   - 100% = 45°
+   (conversion instantanée)
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 10 : Persistance des données
+═══════════════════════════════════════════════════════════
+
+1. Ajouter une tuile
+2. Sauvegarder un chantier
+3. Activer le mode sombre
+4. Fermer complètement le navigateur
+5. Rouvrir index.html
+6. Vérifier que :
+   - La tuile est toujours là
+   - Le chantier est toujours là
+   - Le mode sombre est actif
+
+✅ RÉSULTAT ATTENDU : Toutes les données sont conservées
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 11 : Console du navigateur (F12)
+═══════════════════════════════════════════════════════════
+
+1. Ouvrir la console (F12)
+2. Lancer un calcul
+3. Vérifier la présence de logs :
+   - 🔍 Longueurs utiles
+   - 📊 Bornes rangs
+   - ✅ Solution trouvée
+4. Vérifier l'absence d'erreurs (en rouge)
+
+✅ RÉSULTAT ATTENDU : Logs présents, pas d'erreurs
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 12 : Modifier une tuile
+═══════════════════════════════════════════════════════════
+
+1. Aller dans "Mes tuiles"
+2. Cliquer sur l'icône crayon (Modifier)
+3. Changer le nom de la tuile
+4. Cliquer sur "Modifier"
+5. Vérifier que le nom est mis à jour
+
+✅ RÉSULTAT ATTENDU : Modification enregistrée
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 13 : Supprimer une tuile
+═══════════════════════════════════════════════════════════
+
+1. Aller dans "Mes tuiles"
+2. Cliquer sur l'icône poubelle (Supprimer)
+3. La tuile disparaît immédiatement
+4. Recharger la page
+5. Vérifier que la tuile n'est plus là
+
+✅ RÉSULTAT ATTENDU : Tuile supprimée définitivement
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 14 : Supprimer un chantier
+═══════════════════════════════════════════════════════════
+
+1. Aller dans "Chantiers sauvegardés"
+2. Cliquer sur le bouton rouge (Supprimer)
+3. Confirmer la suppression
+4. Vérifier que le chantier disparaît
+
+✅ RÉSULTAT ATTENDU : Chantier supprimé après confirmation
+
+═══════════════════════════════════════════════════════════
+
+✅ TEST 15 : Responsive design (mobile)
+═══════════════════════════════════════════════════════════
+
+1. Réduire la fenêtre du navigateur (< 768px)
+2. OU ouvrir sur smartphone
+3. Vérifier que :
+   - Les cartes s'affichent en colonne unique
+   - Les formulaires sont lisibles
+   - Les boutons sont cliquables
+   - Pas de débordement horizontal
+
+✅ RÉSULTAT ATTENDU : Interface adaptée aux petits écrans
+
+═══════════════════════════════════════════════════════════
+
+🐛 SI UN TEST ÉCHOUE
+═══════════════════════════════════════════════════════════
+
+1. Ouvrir la console du navigateur (F12)
+2. Noter le message d'erreur (en rouge)
+3. Identifier le fichier concerné
+4. Ouvrir ce fichier dans un éditeur
+5. Chercher la fonction mentionnée dans l'erreur
+6. Corriger le problème
+7. Sauvegarder et recharger la page
+
+═══════════════════════════════════════════════════════════
+
+📊 CHECKLIST FINALE
+═══════════════════════════════════════════════════════════
+
+□ Page d'accueil s'affiche
+□ Mode sombre fonctionne
+□ Navigation fluide
+□ Ajout de tuile OK
+□ Calculateur mode normal OK
+□ Calculateur mode hors pureau OK
+□ Lecture vocale OK
+□ Sauvegarde chantier OK
+□ Conversion degré/% OK
+□ Persistance des données OK
+□ Pas d'erreurs dans la console
+□ Modification tuile OK
+□ Suppression tuile OK
+□ Suppression chantier OK
+□ Responsive design OK
+
+═══════════════════════════════════════════════════════════
+
+🎯 TESTS AVANCÉS (OPTIONNEL)
+═══════════════════════════════════════════════════════════
+
+Test de charge :
+□ Ajouter 50 tuiles
+□ Sauvegarder 50 chantiers
+□ Vérifier que l'app reste rapide
+
+Test de limites :
+□ Rampant de 10000 cm → Vérifie overflow
+□ Pureau min > Pureau max → Vérifie validation
+□ Champs vides → Vérifie alertes
+
+Test de compatibilité :
+□ Chrome (recommandé)
+□ Firefox
+□ Safari
+□ Edge
+
+═══════════════════════════════════════════════════════════
+
+✅ RÉSULTAT FINAL ATTENDU
+═══════════════════════════════════════════════════════════
+
+Tous les tests doivent passer ! ✅
+
+Si un test échoue, consulter :
+1. README.md pour la documentation
+2. ARCHITECTURE_VISUELLE.txt pour comprendre le code
+3. La console du navigateur pour les erreurs
+
+═══════════════════════════════════════════════════════════
+
+💡 CONSEIL POUR LES DÉVELOPPEURS
+═══════════════════════════════════════════════════════════
+
+Avant de modifier le code :
+1. Faire TOUS ces tests et noter les résultats
+2. Apporter les modifications
+3. Refaire TOUS les tests
+4. Comparer les résultats
+
+→ S'assure qu'aucune régression n'est introduite
+
+═══════════════════════════════════════════════════════════
+
+🏆 Bonne chance avec les tests ! 🚀
+
+═══════════════════════════════════════════════════════════

@@ -1,0 +1,312 @@
+═══════════════════════════════════════════════════════════
+   FACTIS - Mise à jour EXCEL (v2.0)
+═══════════════════════════════════════════════════════════
+
+✅ MISE À JOUR TERMINÉE !
+
+═══════════════════════════════════════════════════════════
+
+📦 FICHIERS À TÉLÉCHARGER
+═══════════════════════════════════════════════════════════
+
+🆕 NOUVEAUX FICHIERS (à ajouter) - 3 fichiers
+════════════════════════════════════════════════════════════
+
+1. ✨ excel-loader.js
+   → Nouveau fichier pour lire les fichiers Excel
+   → À placer à la racine avec les autres .js
+
+2. ✨ data/tuiles.xlsx
+   → Catalogue des tuiles (8 exemples)
+   → Modifiable avec Excel ou LibreOffice
+   → À placer dans le dossier data/
+
+3. ✨ data/lecons.xlsx
+   → Liste des leçons (7 exemples)
+   → Modifiable avec Excel ou LibreOffice
+   → À placer dans le dossier data/
+
+═══════════════════════════════════════════════════════════
+
+🔄 FICHIERS À REMPLACER - 4 fichiers
+════════════════════════════════════════════════════════════
+
+4. 🔄 index.html
+   → Ajout du script SheetJS (bibliothèque Excel)
+   → Ajout du chargement de excel-loader.js
+
+5. 🔄 app.js
+   → Chargement des données depuis Excel au démarrage
+   → Affichage du catalogue depuis Excel
+   → Affichage des leçons depuis Excel
+
+6. 🔄 pages.js (OPTIONNEL)
+   → Affichage des tuiles du catalogue dans le menu calculateur
+   → Si tu ne le remplaces pas, ça fonctionnera quand même !
+
+7. 🔄 README.md
+   → Documentation mise à jour avec Excel
+   → Instructions pour modifier les fichiers Excel
+   → Suppression de la section Google Sheet
+
+═══════════════════════════════════════════════════════════
+
+✅ FICHIERS INCHANGÉS (ne pas toucher)
+════════════════════════════════════════════════════════════
+
+✅ styles.css
+✅ storage.js
+✅ calculateur.js ⭐ (toujours isolé !)
+✅ vocal.js
+✅ calculateur-ui.js
+✅ Tous les fichiers .txt
+
+═══════════════════════════════════════════════════════════
+
+📋 STRUCTURE FINALE DE TON DOSSIER
+════════════════════════════════════════════════════════════
+
+factis-app/
+│
+├── index.html              🔄 (remplacé)
+├── styles.css              ✅ (inchangé)
+├── storage.js              ✅ (inchangé)
+├── calculateur.js          ✅ (inchangé)
+├── vocal.js                ✅ (inchangé)
+├── excel-loader.js         ✨ (nouveau)
+├── app.js                  🔄 (remplacé)
+├── pages.js                🔄 (remplacé - optionnel)
+├── calculateur-ui.js       ✅ (inchangé)
+├── README.md               🔄 (remplacé)
+│
+└── data/                   ✨ (nouveau dossier)
+    ├── tuiles.xlsx         ✨ (nouveau)
+    └── lecons.xlsx         ✨ (nouveau)
+
+═══════════════════════════════════════════════════════════
+
+🎯 INSTALLATION EN 3 ÉTAPES
+════════════════════════════════════════════════════════════
+
+1. CRÉER le dossier "data" à la racine
+   └─→ Même niveau que index.html
+
+2. AJOUTER les 3 nouveaux fichiers :
+   ✨ excel-loader.js (racine)
+   ✨ data/tuiles.xlsx
+   ✨ data/lecons.xlsx
+
+3. REMPLACER les 4 fichiers modifiés :
+   🔄 index.html
+   🔄 app.js
+   🔄 pages.js (optionnel)
+   🔄 README.md
+
+═══════════════════════════════════════════════════════════
+
+⚠️ IMPORTANT : SERVEUR WEB REQUIS
+════════════════════════════════════════════════════════════
+
+Les fichiers Excel ne peuvent PAS être chargés en double-cliquant
+sur index.html (restriction de sécurité du navigateur).
+
+Tu DOIS héberger l'application sur un serveur web.
+
+🚀 SOLUTIONS SIMPLES :
+
+Option 1 : Python (le plus simple)
+─────────────────────────────────
+1. Ouvrir un terminal dans le dossier de l'app
+2. Taper : python -m http.server 8000
+3. Ouvrir : http://localhost:8000
+
+Option 2 : VS Code avec Live Server
+─────────────────────────────────
+1. Installer l'extension "Live Server"
+2. Clic droit sur index.html → "Open with Live Server"
+
+Option 3 : Hébergement web classique
+─────────────────────────────────
+Héberger sur OVH, o2switch, etc.
+
+═══════════════════════════════════════════════════════════
+
+📊 MODIFIER LES DONNÉES EXCEL
+════════════════════════════════════════════════════════════
+
+📁 data/tuiles.xlsx
+─────────────────────────────────
+
+Colonnes (ne pas changer les noms !) :
+• Marque (ex: Edilians)
+• Type (plate, faible-galbe, grand-galbe)
+• Modèle (ex: Oméga 10)
+• Pureau Min (ex: 37)
+• Pureau Max (ex: 40)
+• Pureau Départ (ex: 35)
+• Espace Faîtage (ex: 15)
+• URL Image (optionnel)
+• URL PDF (optionnel)
+
+📁 data/lecons.xlsx
+─────────────────────────────────
+
+Colonnes (ne pas changer les noms !) :
+• Titre (ex: Pose en rive)
+• Description (ex: Technique de pose...)
+• URL (ex: lecons/pose-rive.pdf)
+
+💡 Pour modifier :
+1. Ouvrir le fichier Excel
+2. Modifier les données (garder les en-têtes !)
+3. Sauvegarder
+4. Recharger la page web (F5)
+
+═══════════════════════════════════════════════════════════
+
+✨ NOUVEAUTÉS DE LA VERSION 2.0
+════════════════════════════════════════════════════════════
+
+✅ Catalogue de tuiles depuis Excel
+   → 8 tuiles d'exemple incluses
+   → Facile à modifier avec Excel
+   → Affichage dans le catalogue complet
+   → Sélection dans le calculateur
+
+✅ Leçons depuis Excel
+   → 7 leçons d'exemple incluses
+   → Facile à modifier avec Excel
+   → Affichage dans la page Leçons
+
+✅ Pas besoin de Google Sheet
+   → Tout est local et modifiable
+   → Plus simple à gérer
+   → Pas de connexion internet nécessaire
+
+✅ Calculateur toujours isolé
+   → calculateur.js reste indépendant
+   → Aucun changement sur la logique de calcul
+
+═══════════════════════════════════════════════════════════
+
+🧪 TESTER L'INSTALLATION
+════════════════════════════════════════════════════════════
+
+1. Lancer le serveur web
+2. Ouvrir http://localhost:8000
+3. Aller dans "Catalogue de tuiles"
+4. Vérifier que les 8 tuiles s'affichent
+5. Aller dans "Leçons de couverture"
+6. Vérifier que les 7 leçons s'affichent
+7. Ouvrir la console (F12)
+8. Vérifier les messages :
+   ✅ SheetJS disponible
+   ✅ Tuiles chargées: 8
+   ✅ Leçons chargées: 7
+
+═══════════════════════════════════════════════════════════
+
+🐛 EN CAS DE PROBLÈME
+════════════════════════════════════════════════════════════
+
+❌ "Aucune tuile dans le catalogue"
+→ Vérifier que data/tuiles.xlsx existe
+→ Vérifier que tu utilises un serveur web (pas file://)
+→ Ouvrir la console (F12) pour voir l'erreur
+
+❌ "SheetJS non chargé"
+→ Vérifier que index.html contient le script SheetJS
+→ Vérifier ta connexion internet (SheetJS vient d'un CDN)
+
+❌ Les données ne se chargent pas
+→ Ouvrir la console (F12)
+→ Vérifier les erreurs en rouge
+→ Vérifier que les fichiers Excel sont bien nommés
+
+═══════════════════════════════════════════════════════════
+
+📈 AVANTAGES DE LA VERSION EXCEL
+════════════════════════════════════════════════════════════
+
+✅ Modification facile avec Excel (interface familière)
+✅ Pas besoin de Google Account
+✅ Données locales (confidentialité)
+✅ Fonctionne hors ligne (sauf CDN SheetJS)
+✅ Partage facile (envoyer les fichiers .xlsx)
+✅ Sauvegarde simple (copier les .xlsx)
+✅ Compatible LibreOffice et Google Sheets
+
+═══════════════════════════════════════════════════════════
+
+📝 RÉSUMÉ DES CHANGEMENTS
+════════════════════════════════════════════════════════════
+
+Avant (v1.0) :
+❌ Données hardcodées dans le code
+❌ Catalogue non fonctionnel
+❌ Modification = éditer le code JavaScript
+
+Après (v2.0) :
+✅ Données dans des fichiers Excel
+✅ Catalogue complet et fonctionnel
+✅ Modification = ouvrir Excel et sauvegarder
+
+═══════════════════════════════════════════════════════════
+
+🎯 PROCHAINES ÉTAPES
+════════════════════════════════════════════════════════════
+
+1. Télécharger les 7 fichiers (3 nouveaux + 4 modifiés)
+2. Installer selon les instructions ci-dessus
+3. Lancer sur un serveur web
+4. Tester le catalogue et les leçons
+5. Modifier data/tuiles.xlsx avec tes vraies tuiles
+6. Modifier data/lecons.xlsx avec tes vraies leçons
+
+═══════════════════════════════════════════════════════════
+
+💾 CONTENU DES FICHIERS EXCEL FOURNIS
+════════════════════════════════════════════════════════════
+
+📁 tuiles.xlsx (8 tuiles d'exemple) :
+─────────────────────────────────
+• Edilians - Oméga 10
+• Edilians - Oméga 13
+• Edilians - Arpège
+• Terreal - Phalempin
+• Terreal - Plate 17x27
+• Imerys - Beauvoise
+• Imerys - Paysage
+• Monier - Perspective
+
+📁 lecons.xlsx (7 leçons d'exemple) :
+─────────────────────────────────
+• Pose en rive
+• Raccord de faîtage
+• Noues et arêtiers
+• Ventilation de toiture
+• Pose chatière
+• Écran de sous-toiture
+• Zinguerie
+
+Ces données sont des EXEMPLES. Remplace-les par tes vraies données !
+
+═══════════════════════════════════════════════════════════
+
+🏆 VERSION 2.0 PRÊTE !
+════════════════════════════════════════════════════════════
+
+L'application FACTIS est maintenant 100% complète avec :
+✅ Calculateur isolé
+✅ Catalogue Excel
+✅ Leçons Excel
+✅ Mode sombre
+✅ Lecture vocale
+✅ Sauvegarde chantiers
+
+Bon travail avec FACTIS v2.0 ! 🚀
+
+═══════════════════════════════════════════════════════════
+
+© 2025 CHAPEL - SARL Toitures Des Garrigues 34160
+Version 2.0 - Mise à jour Excel

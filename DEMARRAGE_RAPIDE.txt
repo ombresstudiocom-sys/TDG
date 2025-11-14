@@ -1,0 +1,144 @@
+═══════════════════════════════════════════════════════════
+   FACTIS - Guide de démarrage rapide
+═══════════════════════════════════════════════════════════
+
+🚀 INSTALLATION (5 secondes)
+
+1. Extraire tous les fichiers dans un dossier
+2. Double-cliquer sur index.html
+3. C'est tout ! ✅
+
+═══════════════════════════════════════════════════════════
+
+📁 FICHIERS INCLUS
+
+✅ index.html              → Page principale
+✅ styles.css              → Tous les styles
+✅ storage.js              → Sauvegarde des données
+✅ calculateur.js          → ⭐ MOTEUR DE CALCUL (ISOLÉ)
+✅ vocal.js                → Lecture vocale
+✅ app.js                  → Navigation et pages simples
+✅ pages.js                → Pages complexes
+✅ calculateur-ui.js       → Interface du calculateur
+✅ README.md               → Documentation complète
+
+═══════════════════════════════════════════════════════════
+
+🔧 CORRIGER LE CALCULATEUR
+
+Le calculateur est TOTALEMENT ISOLÉ dans calculateur.js
+
+Pour corriger un bug :
+1. Ouvrir calculateur.js
+2. Chercher la fonction concernée (ligne ~50-400)
+3. Modifier uniquement ce fichier
+4. Sauvegarder et recharger la page
+
+Pas besoin de toucher aux autres fichiers !
+
+═══════════════════════════════════════════════════════════
+
+🎯 POINTS CLÉS
+
+✅ CALCULATEUR ISOLÉ
+   → calculateur.js contient TOUTE la logique
+   → Facile à corriger sans casser le reste
+
+✅ AUCUNE DÉPENDANCE
+   → Pas de npm, webpack, ou compilation
+   → Modifiable avec n'importe quel éditeur
+
+✅ MULTI-FICHIERS ORGANISÉ
+   → Chaque fichier a une responsabilité claire
+   → Navigation simple entre les fichiers
+
+✅ BIEN DOCUMENTÉ
+   → Commentaires dans le code
+   → README.md complet
+   → Structure claire
+
+═══════════════════════════════════════════════════════════
+
+🐛 DEBUG
+
+Ouvrir la console du navigateur (F12) :
+- Voir les logs de calcul
+- Détecter les erreurs
+- Inspecter l'état de l'app
+
+═══════════════════════════════════════════════════════════
+
+📊 STRUCTURE DU CALCULATEUR (calculateur.js)
+
+Ligne  50 : calculer() - Fonction principale
+Ligne 100 : validerEntrees() - Validation
+Ligne 150 : chercherSolutionNormale() - Mode NORMAL
+Ligne 200 : chercherSolutionHorsPureau() - Mode HORS PUREAU
+Ligne 250 : trouverPilePoil() - Test pile-poil
+Ligne 300 : genererResultatRampant() - Génération résultats
+Ligne 350 : genererTracage() - Traçage avec cotes
+
+═══════════════════════════════════════════════════════════
+
+✨ FONCTIONNALITÉS COMPLÈTES
+
+✅ Navigation fluide entre les pages
+✅ Mode sombre/clair persistant
+✅ Gestion des tuiles personnalisées
+✅ Calculateur de pureau (mode normal + hors pureau)
+✅ Lecture vocale avec commandes
+✅ Sauvegarde des chantiers
+✅ Conversion degré ↔ pourcentage
+✅ Traçage complet avec cotes cumulées
+
+═══════════════════════════════════════════════════════════
+
+🎤 COMMANDES VOCALES
+
+"suivant"    → Cote suivante
+"répète"     → Répète la cote
+"avant"      → Cote précédente
+"stop"       → Arrête la lecture
+
+═══════════════════════════════════════════════════════════
+
+📝 POUR DÉVELOPPEURS
+
+Lisez README.md pour :
+- Architecture complète du code
+- Comment modifier le calculateur
+- Ajouter des fonctionnalités
+- Structure des données
+- Debugging avancé
+
+═══════════════════════════════════════════════════════════
+
+💡 EXEMPLE DE CORRECTION
+
+Problème : Le pureau calculé n'est pas bon
+
+Solution :
+1. Ouvrir calculateur.js
+2. Aller ligne ~150 (fonction chercherSolutionNormale)
+3. Vérifier le calcul :
+   const pureau1 = longueurUtile1 / nbRangs;
+4. Modifier si nécessaire
+5. Sauvegarder et tester
+
+═══════════════════════════════════════════════════════════
+
+🌐 NAVIGATEURS SUPPORTÉS
+
+✅ Chrome (recommandé)
+✅ Firefox
+✅ Safari
+✅ Edge
+
+Versions récentes uniquement (2023+)
+
+═══════════════════════════════════════════════════════════
+
+© 2025 CHAPEL - SARL Toitures Des Garrigues 34160
+Tous droits réservés
+
+Version 1.0.0 - Novembre 2025

@@ -1,0 +1,344 @@
+═══════════════════════════════════════════════════════════
+   FACTIS - Architecture visuelle du code
+═══════════════════════════════════════════════════════════
+
+📁 STRUCTURE DES FICHIERS
+═══════════════════════════════════════════════════════════
+
+factis-app/
+│
+├── 🌐 index.html (830 octets)
+│   └─→ Point d'entrée, charge tous les scripts
+│
+├── 🎨 styles.css (9.2 Ko)
+│   └─→ Tous les styles, variables CSS, responsive
+│
+├── 💾 storage.js (1.7 Ko)
+│   └─→ Gestion localStorage centralisée
+│
+├── 🧮 calculateur.js (15 Ko) ⭐ FICHIER CLÉ
+│   └─→ Moteur de calcul ISOLÉ et INDÉPENDANT
+│
+├── 🎤 vocal.js (7 Ko)
+│   └─→ Synthèse et reconnaissance vocale
+│
+├── 🚀 app.js (21 Ko)
+│   └─→ État global + Navigation + Pages simples
+│
+├── 📄 pages.js (13 Ko)
+│   └─→ Pages complexes (Tuiles, Chantiers)
+│
+├── 🖥️ calculateur-ui.js (16 Ko)
+│   └─→ Interface du calculateur + Résultats
+│
+└── 📚 README.md (9.6 Ko)
+    └─→ Documentation complète
+
+═══════════════════════════════════════════════════════════
+
+🔄 FLUX DE L'APPLICATION
+═══════════════════════════════════════════════════════════
+
+┌──────────────────────────────────────────────────────────┐
+│                    UTILISATEUR                            │
+│                 Double-clic sur index.html                │
+└───────────────────────┬───────────────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────────────┐
+│                    index.html                             │
+│  Charge les scripts dans l'ordre :                       │
+│  1. storage.js                                            │
+│  2. calculateur.js                                        │
+│  3. vocal.js                                              │
+│  4. app.js                                                │
+│  5. pages.js                                              │
+│  6. calculateur-ui.js                                     │
+└───────────────────────┬───────────────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────────────┐
+│                    app.js - initApp()                     │
+│  • Charge données depuis localStorage                    │
+│  • Applique le thème (sombre/clair)                      │
+│  • Affiche la page d'accueil                             │
+└───────────────────────┬───────────────────────────────────┘
+                        │
+                        ▼
+        ┌───────────────┴───────────────┐
+        │                               │
+        ▼                               ▼
+┌──────────────┐              ┌──────────────┐
+│ Pages simples│              │Pages complexes│
+│  (app.js)    │              │  (pages.js)   │
+├──────────────┤              ├──────────────┤
+│ • Accueil    │              │ • Mes Tuiles  │
+│ • Menu Outils│              │ • Chantiers   │
+│ • Leçons     │              │ • Ajout Tuile │
+│ • Catalogue  │              │               │
+│ • Soutenir   │              │               │
+└──────────────┘              └──────────────┘
+        │
+        │
+        ▼
+┌──────────────────────────────────────────────────────────┐
+│           Calculateur (calculateur-ui.js)                 │
+│                                                           │
+│  Utilisateur remplit le formulaire                       │
+│            │                                              │
+│            ▼                                              │
+│  lancerCalcul() collecte les données                     │
+│            │                                              │
+│            ▼                                              │
+│  ┌─────────────────────────────────────────┐            │
+│  │   calculateur.js (ISOLÉ)                │            │
+│  │   CalculateurPureau.calculer(params)    │            │
+│  │                                          │            │
+│  │   • Validation des entrées              │            │
+│  │   • Calcul longueurs utiles             │            │
+│  │   • Mode NORMAL (rangs communs)         │            │
+│  │   • Mode HORS PUREAU (indépendants)     │            │
+│  │   • Génération du traçage               │            │
+│  │                                          │            │
+│  │   return { resultat }                   │            │
+│  └─────────────────────────────────────────┘            │
+│            │                                              │
+│            ▼                                              │
+│  afficherResultats(resultat)                             │
+│            │                                              │
+│            ▼                                              │
+│  ┌─────────────────────────────────────────┐            │
+│  │  Affichage pour chaque rampant :        │            │
+│  │  • Nombre de rangs                      │            │
+│  │  • Pureau calculé                       │            │
+│  │  • Détail des rangs                     │            │
+│  │  • Traçage avec cotes                   │            │
+│  │  • Bouton "Lire" (vocal.js)             │            │
+│  └─────────────────────────────────────────┘            │
+│            │                                              │
+│            ▼                                              │
+│  Bouton "Sauvegarder" → storage.js                      │
+└──────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════
+
+🧮 CALCULATEUR.JS - Architecture interne
+═══════════════════════════════════════════════════════════
+
+CalculateurPureau.calculer(params)
+│
+├─→ 1. validerEntrees(params)
+│   └─→ Vérifie que tous les champs sont remplis et valides
+│
+├─→ 2. Calcul des longueurs utiles
+│   └─→ longueurUtile = rampant - premierRang - espaceFaitage
+│
+├─→ 3. chercherSolutionNormale()
+│   │   But : Trouver un nombre de rangs COMMUN
+│   │
+│   ├─→ Pour chaque nombre de rangs possible :
+│   │   ├─→ pureau1 = longueurUtile1 / nbRangs
+│   │   ├─→ pureau2 = longueurUtile2 / nbRangs
+│   │   └─→ Si les 2 pureauxdans [min, max] → ✅ Solution !
+│   │
+│   └─→ return { nombreRangs, pureau1, pureau2 } ou null
+│
+├─→ 4. Si pas de solution → chercherSolutionHorsPureau()
+│   │   But : Optimiser chaque rampant indépendamment
+│   │
+│   ├─→ trouverPilePoil(rampant1)
+│   │   └─→ Teste si un nombre de rangs donne un pureau exact
+│   │
+│   ├─→ trouverPilePoil(rampant2)
+│   │
+│   └─→ 3 CAS :
+│       ├─→ CAS A : Les 2 ont pile-poil (mais nbRangs ≠)
+│       ├─→ CAS B : 1 seul a pile-poil
+│       └─→ CAS C : Aucun → forcerPureauProche()
+│
+├─→ 5. genererResultatRampant() pour chaque rampant
+│   │
+│   ├─→ Création de l'objet résultat
+│   ├─→ Ajout des détails des rangs (si hors pureau)
+│   ├─→ Calcul des rangs supplémentaires (si normal)
+│   └─→ genererTracage() → Liste des cotes cumulées
+│
+└─→ 6. return { rampant1: {...}, rampant2: {...}, ... }
+
+═══════════════════════════════════════════════════════════
+
+💾 STORAGE.JS - Gestion des données
+═══════════════════════════════════════════════════════════
+
+localStorage (navigateur)
+    ↕️
+Storage.saveTuiles()      ←→  AppState.mesTuiles
+Storage.loadTuiles()
+    ↕️
+Storage.saveChantiers()   ←→  AppState.mesChantiers
+Storage.loadChantiers()
+    ↕️
+Storage.saveModeSombre()  ←→  AppState.modeSombre
+Storage.loadModeSombre()
+
+Données persistantes même après fermeture du navigateur !
+
+═══════════════════════════════════════════════════════════
+
+🎤 VOCAL.JS - Lecture vocale
+═══════════════════════════════════════════════════════════
+
+Vocal.demarrerLecture(rampant, tracage)
+│
+├─→ Synthèse vocale (Web Speech Synthesis API)
+│   └─→ Lit chaque cote : "Rampant 1, cote 48 centimètres"
+│
+└─→ Reconnaissance vocale (Web Speech Recognition API)
+    │
+    ├─→ "suivant" → Vocal.coteSuivante()
+    ├─→ "répète" → Vocal.repeterCote()
+    ├─→ "avant" → Vocal.cotePrecedente()
+    └─→ "stop" → Vocal.arreterLecture()
+
+═══════════════════════════════════════════════════════════
+
+🎨 STYLES.CSS - Système de thème
+═══════════════════════════════════════════════════════════
+
+Variables CSS (ligne ~15)
+├─→ --color-blue-600
+├─→ --color-red-600
+├─→ --color-gray-800
+└─→ etc.
+
+Classes utilitaires (Tailwind-like)
+├─→ .card { ... }
+├─→ .btn { ... }
+├─→ .grid-2 { ... }
+└─→ etc.
+
+Mode sombre/clair
+├─→ .app-container.light { background: gradient blue }
+└─→ .app-container.dark { background: gradient gray }
+
+Responsive design
+└─→ @media (max-width: 768px) { ... }
+
+═══════════════════════════════════════════════════════════
+
+🔧 POINTS D'ENTRÉE POUR MODIFICATIONS
+═══════════════════════════════════════════════════════════
+
+❓ Je veux...                  📁 Fichier à modifier
+────────────────────────────────────────────────────────────
+Corriger le calcul           → calculateur.js (ligne ~50)
+Changer les couleurs         → styles.css (ligne ~15)
+Modifier la voix             → vocal.js (ligne ~30)
+Ajouter une page             → app.js (fonction render)
+Ajouter un champ tuile       → pages.js (renderPageAjouterTuile)
+Changer l'affichage résultats→ calculateur-ui.js (afficherResultats)
+Modifier le stockage         → storage.js
+
+═══════════════════════════════════════════════════════════
+
+🎯 RÈGLE D'OR POUR CORRIGER LE CALCULATEUR
+═══════════════════════════════════════════════════════════
+
+                    ⚠️ IMPORTANT ⚠️
+
+     Pour corriger un bug de calcul du pureau :
+              👇 UN SEUL FICHIER 👇
+                 calculateur.js
+
+         Ligne ~50 à ~400 : TOUTE la logique
+
+    ❌ Ne PAS toucher aux autres fichiers
+    ✅ Modifier uniquement calculateur.js
+    ✅ Sauvegarder et recharger la page
+    ✅ C'est tout !
+
+═══════════════════════════════════════════════════════════
+
+📊 DONNÉES CIRCULANT DANS L'APP
+═══════════════════════════════════════════════════════════
+
+AppState (état global)
+    ↓
+    ├─→ page: 'accueil' | 'menu-outils' | etc.
+    ├─→ sousPage: null | 'calculateur' | etc.
+    ├─→ modeSombre: boolean
+    ├─→ mesTuiles: [ {tuile1}, {tuile2}, ... ]
+    ├─→ mesChantiers: [ {chantier1}, {chantier2}, ... ]
+    └─→ tuileSelectionnee: {tuile} ou null
+
+Objet Tuile
+    ├─→ id: timestamp
+    ├─→ nom: string
+    ├─→ marque: string
+    ├─→ type: 'plate' | 'faible-galbe' | 'grand-galbe'
+    ├─→ pureauMin: string
+    ├─→ pureauMax: string
+    ├─→ pureauDepart: string
+    └─→ espaceFaitage: string
+
+Objet Résultat
+    ├─→ rampant1: { nombreRangs, pureauCalcule, tracage, ... }
+    ├─→ rampant2: { ... }
+    ├─→ nombreRangsCommun: number ou null
+    └─→ horsPureau: boolean
+
+═══════════════════════════════════════════════════════════
+
+💡 EXEMPLE CONCRET DE MODIFICATION
+═══════════════════════════════════════════════════════════
+
+Scénario : Le pureau calculé est toujours trop grand
+
+1. Ouvrir calculateur.js
+2. Ligne ~150, fonction chercherSolutionNormale()
+3. Actuellement :
+   const pureau1 = longueurUtile1 / nbRangs;
+   
+4. Modifier en :
+   const pureau1 = longueurUtile1 / nbRangs - 0.5;
+   
+5. Sauvegarder
+6. Recharger la page
+7. Tester → Le pureau est réduit de 0.5 cm ✅
+
+═══════════════════════════════════════════════════════════
+
+✨ RÉSUMÉ VISUEL
+═══════════════════════════════════════════════════════════
+
+index.html → Point d'entrée
+    ↓
+app.js → Chef d'orchestre (navigation, état)
+    ↓
+pages.js → Pages complexes
+    ↓
+calculateur-ui.js → Interface du calculateur
+    ↓
+calculateur.js → 🧮 MOTEUR DE CALCUL (ISOLÉ)
+    ↓
+vocal.js → 🎤 Lecture et commandes vocales
+    ↓
+storage.js → 💾 Sauvegarde localStorage
+    ↓
+styles.css → 🎨 Apparence et thème
+
+═══════════════════════════════════════════════════════════
+
+🏆 MISSION ACCOMPLIE
+═══════════════════════════════════════════════════════════
+
+✅ Application 100% fonctionnelle
+✅ Calculateur totalement isolé
+✅ Code organisé et documenté
+✅ Facile à maintenir et corriger
+✅ Zéro dépendance externe
+✅ Multi-fichiers clair
+
+Prêt à être utilisé ou modifié ! 🚀
+
+═══════════════════════════════════════════════════════════

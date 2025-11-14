@@ -1,0 +1,207 @@
+═══════════════════════════════════════════════════════════
+   LISTE DES FICHIERS À TÉLÉCHARGER
+═══════════════════════════════════════════════════════════
+
+📥 FICHIERS À TÉLÉCHARGER (7 fichiers au total)
+
+═══════════════════════════════════════════════════════════
+
+🆕 NOUVEAUX FICHIERS (3 fichiers) - À AJOUTER
+═══════════════════════════════════════════════════════════
+
+1. ✨ excel-loader.js (5.5 Ko)
+   📍 À placer : racine du dossier (avec app.js, vocal.js, etc.)
+   📝 Description : Charge et lit les fichiers Excel
+   
+2. ✨ data/tuiles.xlsx (5.5 Ko)
+   📍 À placer : dans un nouveau dossier "data"
+   📝 Description : Catalogue de 8 tuiles d'exemple
+   
+3. ✨ data/lecons.xlsx (5.3 Ko)
+   📍 À placer : dans le dossier "data"
+   📝 Description : Liste de 7 leçons d'exemple
+
+═══════════════════════════════════════════════════════════
+
+🔄 FICHIERS MODIFIÉS (4 fichiers) - À REMPLACER
+═══════════════════════════════════════════════════════════
+
+4. 🔄 index.html (1 Ko)
+   📍 Remplacer : celui existant à la racine
+   ✏️ Changement : Ajout du script SheetJS + excel-loader.js
+
+5. 🔄 app.js (27 Ko)
+   📍 Remplacer : celui existant à la racine
+   ✏️ Changement : Chargement Excel + Catalogue fonctionnel
+
+6. 🔄 README.md (12 Ko)
+   📍 Remplacer : celui existant à la racine
+   ✏️ Changement : Documentation Excel
+
+7. 🔄 pages.js (13 Ko) - OPTIONNEL
+   📍 Remplacer : celui existant à la racine
+   ✏️ Changement : Affichage des tuiles du catalogue dans le menu
+   ⚠️ Si tu ne le remplaces pas, l'app fonctionnera quand même !
+
+═══════════════════════════════════════════════════════════
+
+✅ FICHIERS À NE PAS TOUCHER (11 fichiers)
+═══════════════════════════════════════════════════════════
+
+✅ styles.css - Inchangé
+✅ storage.js - Inchangé
+✅ calculateur.js ⭐ - Inchangé (toujours isolé !)
+✅ vocal.js - Inchangé
+✅ calculateur-ui.js - Inchangé
+✅ ARCHITECTURE_VISUELLE.txt - Inchangé
+✅ CONVERSION_COMPLETE.txt - Inchangé
+✅ DEMARRAGE_RAPIDE.txt - Inchangé
+✅ GUIDE_DE_TEST.txt - Inchangé
+✅ INDEX.txt - Inchangé
+✅ + tous les autres fichiers .txt
+
+═══════════════════════════════════════════════════════════
+
+📂 ARBORESCENCE FINALE
+═══════════════════════════════════════════════════════════
+
+factis-app/
+│
+├── 🔄 index.html          [REMPLACER]
+├── ✅ styles.css           [GARDER]
+├── ✅ storage.js           [GARDER]
+├── ✅ calculateur.js       [GARDER]
+├── ✅ vocal.js             [GARDER]
+├── ✨ excel-loader.js     [NOUVEAU]
+├── 🔄 app.js              [REMPLACER]
+├── 🔄 pages.js            [REMPLACER - optionnel]
+├── ✅ calculateur-ui.js   [GARDER]
+├── 🔄 README.md           [REMPLACER]
+│
+├── data/                  [CRÉER CE DOSSIER]
+│   ├── ✨ tuiles.xlsx    [NOUVEAU]
+│   └── ✨ lecons.xlsx    [NOUVEAU]
+│
+└── ✅ Tous les .txt       [GARDER]
+
+═══════════════════════════════════════════════════════════
+
+🎯 PROCÉDURE D'INSTALLATION DÉTAILLÉE
+═══════════════════════════════════════════════════════════
+
+ÉTAPE 1 : Créer le dossier data
+────────────────────────────────
+Dans ton dossier factis-app (celui qui contient index.html),
+créer un nouveau dossier nommé "data"
+
+ÉTAPE 2 : Télécharger et ajouter les 3 nouveaux fichiers
+──────────────────────────────────────────────────────────
+• Télécharger excel-loader.js → placer à la racine
+• Télécharger tuiles.xlsx → placer dans data/
+• Télécharger lecons.xlsx → placer dans data/
+
+ÉTAPE 3 : Télécharger et remplacer les 4 fichiers modifiés
+────────────────────────────────────────────────────────────
+• Télécharger le nouveau index.html → remplacer l'ancien
+• Télécharger le nouveau app.js → remplacer l'ancien
+• Télécharger le nouveau README.md → remplacer l'ancien
+• Télécharger le nouveau pages.js → remplacer l'ancien (optionnel)
+
+ÉTAPE 4 : Vérifier l'arborescence
+───────────────────────────────────
+Tu dois avoir :
+✅ excel-loader.js à la racine
+✅ Un dossier "data" avec 2 fichiers .xlsx
+✅ Les fichiers modifiés remplacés
+✅ Tous les anciens fichiers conservés
+
+ÉTAPE 5 : Lancer sur un serveur web
+─────────────────────────────────────
+⚠️ IMPORTANT : Ne pas double-cliquer sur index.html !
+
+Option A - Python (recommandé) :
+1. Ouvrir un terminal dans le dossier
+2. Taper : python -m http.server 8000
+3. Ouvrir : http://localhost:8000
+
+Option B - VS Code :
+1. Installer "Live Server"
+2. Clic droit sur index.html → "Open with Live Server"
+
+ÉTAPE 6 : Tester
+─────────────────
+1. Aller dans "Catalogue de tuiles"
+2. Tu dois voir 8 tuiles
+3. Aller dans "Leçons de couverture"
+4. Tu dois voir 7 leçons
+5. Ouvrir la console (F12)
+6. Vérifier : "✅ Tuiles chargées: 8"
+
+═══════════════════════════════════════════════════════════
+
+📊 TAILLES DES FICHIERS
+═══════════════════════════════════════════════════════════
+
+Nouveaux fichiers :
+• excel-loader.js : 5.5 Ko
+• data/tuiles.xlsx : 5.5 Ko
+• data/lecons.xlsx : 5.3 Ko
+Total nouveaux : 16.3 Ko
+
+Fichiers modifiés :
+• index.html : 1 Ko
+• app.js : 27 Ko
+• pages.js : 13 Ko
+• README.md : 12 Ko
+Total modifiés : 53 Ko
+
+Total à télécharger : 69.3 Ko
+
+═══════════════════════════════════════════════════════════
+
+✅ CHECKLIST DE VÉRIFICATION
+═══════════════════════════════════════════════════════════
+
+Avant de lancer l'app, vérifie que :
+
+□ Le dossier "data" existe
+□ data/tuiles.xlsx est présent
+□ data/lecons.xlsx est présent
+□ excel-loader.js est à la racine
+□ index.html a été remplacé
+□ app.js a été remplacé
+□ README.md a été remplacé
+□ Tu utilises un SERVEUR WEB (pas file://)
+
+Si tout est ✅, tu peux lancer l'application !
+
+═══════════════════════════════════════════════════════════
+
+💡 LIENS DE TÉLÉCHARGEMENT
+═══════════════════════════════════════════════════════════
+
+Tous les fichiers sont disponibles dans le dossier outputs.
+
+NOUVEAUX :
+1. excel-loader.js
+2. data/tuiles.xlsx
+3. data/lecons.xlsx
+
+MODIFIÉS :
+4. index.html
+5. app.js
+6. pages.js
+7. README.md
+
+DOCUMENTATION :
+• MISE_A_JOUR_EXCEL_v2.0.txt (ce fichier)
+• README.md (documentation complète)
+
+═══════════════════════════════════════════════════════════
+
+🎉 C'EST TOUT !
+═══════════════════════════════════════════════════════════
+
+7 fichiers à télécharger = FACTIS v2.0 avec Excel prêt ! 🚀
+
+═══════════════════════════════════════════════════════════
