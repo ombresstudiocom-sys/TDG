@@ -360,8 +360,7 @@ function renderPageMenuOutils() {
     const outils = [
         { icon: 'calculator', color: 'green', titre: 'Calculateur de pureau', desc: 'Calcul précis du pureau', page: 'menu-calculateur' },
         { icon: 'wrench', color: 'blue', titre: 'Pureau Dicté', desc: 'Génération de cotes avec pureau fixe', page: 'menu-outils', sousPage: 'pureau-dicte' },
-        { icon: 'trending-up', color: 'green', titre: 'Calcul degré en pourcentage', desc: 'Conversion degré ↔ %', page: 'conversion-degres' },
-        { icon: 'save', color: 'purple', titre: 'Chantiers sauvegardés', desc: `${AppState.mesChantiers.length} chantier(s)`, page: 'chantiers' }
+        { icon: 'trending-up', color: 'green', titre: 'Calcul degré en pourcentage', desc: 'Conversion degré ↔ %', page: 'conversion-degres' }
     ];
 
     return `

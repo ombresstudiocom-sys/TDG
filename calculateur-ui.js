@@ -50,7 +50,12 @@ function renderCalculateurPureau() {
                 Retour au calculateur
             </button>
 
-            <h2 class="${getTextClass()}">Calculateur de pureau</h2>
+            <div class="flex flex-between mb-4">
+                <h2 class="${getTextClass()}">Calculateur de pureau</h2>
+                <button class="btn btn-secondary" onclick="naviguerVers('chantiers')">
+                    ${icon('save')} Historique
+                </button>
+            </div>
 
             <!-- Barre de recherche de tuile -->
             ${toutesLesTuiles.length > 0 ? `

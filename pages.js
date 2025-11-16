@@ -17,12 +17,12 @@ function renderPageChantiers() {
     if (AppState.mesChantiers.length === 0) {
         return `
             <div class="container">
-                <button class="btn-back" onclick="retourMenuOutils()">
+                <button class="btn-back" onclick="naviguerVers('menu-calculateur', 'calculateur')">
                     ${icon('arrow-left')}
-                    Retour aux outils
+                    Retour au calculateur
                 </button>
 
-                <h2 class="${getTextClass()}">Chantiers sauvegardés</h2>
+                <h2 class="${getTextClass()}">Historique - Chantiers sauvegardés</h2>
 
                 <div class="${getThemeClass('card')} text-center">
                     ${icon('save', 'icon-xl ' + getMutedClass())}
@@ -34,12 +34,12 @@ function renderPageChantiers() {
 
     return `
         <div class="container">
-            <button class="btn-back" onclick="retourMenuOutils()">
+            <button class="btn-back" onclick="naviguerVers('menu-calculateur', 'calculateur')">
                 ${icon('arrow-left')}
-                Retour aux outils
+                Retour au calculateur
             </button>
 
-            <h2 class="${getTextClass()}">Chantiers sauvegardés</h2>
+            <h2 class="${getTextClass()}">Historique - Chantiers sauvegardés</h2>
 
             <div class="space-y-4">
                 ${AppState.mesChantiers.map(chantier => `
