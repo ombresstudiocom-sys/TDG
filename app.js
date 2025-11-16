@@ -314,6 +314,19 @@ function renderPageAccueil() {
                 <p class="${getMutedClass()}">Outil professionnel pour couvreurs</p>
             </div>
 
+            <!-- Boutons principaux (déplacés en premier) -->
+            <div class="grid grid-2">
+                ${cartes.map(carte => `
+                    <button class="${getThemeClass('card')} ${getThemeClass('card-app')} card-button card-clickable" onclick="naviguerVers('${carte.page}')">
+                        <div class="card-icon-wrapper">
+                            ${icon(carte.icon, 'icon-xl text-' + carte.color)}
+                        </div>
+                        <h3 class="${getTextClass()}">${carte.titre}</h3>
+                        <p class="${getMutedClass()} text-sm">${carte.desc}</p>
+                    </button>
+                `).join('')}
+            </div>
+
             <!-- Bloc À propos -->
             <div class="${getThemeClass('info-block')}">
                 <h3 class="${getTextClass()}">📝 À propos de cet outil</h3>
@@ -335,19 +348,6 @@ function renderPageAccueil() {
                     <li>✅ Mode hors pureau avec détail des rangs</li>
                     <li>✅ Interface modernisée et optimisée mobile</li>
                 </ul>
-            </div>
-
-            <!-- Boutons principales -->
-            <div class="grid grid-2">
-                ${cartes.map(carte => `
-                    <button class="${getThemeClass('card')} ${getThemeClass('card-app')} card-button card-clickable" onclick="naviguerVers('${carte.page}')">
-                        <div class="card-icon-wrapper">
-                            ${icon(carte.icon, 'icon-xl text-' + carte.color)}
-                        </div>
-                        <h3 class="${getTextClass()}">${carte.titre}</h3>
-                        <p class="${getMutedClass()} text-sm">${carte.desc}</p>
-                    </button>
-                `).join('')}
             </div>
         </div>
     `;
