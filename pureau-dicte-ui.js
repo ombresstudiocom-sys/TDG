@@ -68,7 +68,7 @@ function renderFormulairePureauxDicte() {
                 <div class="form-group">
                     <label class="${getThemeClass('form-label')}">Espacement du premier rang / Épaisseur du liteau d'accroche (cm) *</label>
                     <input type="number" id="pd-premier-rang" class="${getThemeClass('form-input')}" 
-                           placeholder="Ex: 4" step="0.1" required value="${valeurs.premierRang}">
+                           placeholder="Ex: 4" step="0.1" min="0" required value="${valeurs.premierRang}">
                 </div>
 
                 <div class="form-group">

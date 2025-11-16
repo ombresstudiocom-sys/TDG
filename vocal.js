@@ -34,7 +34,7 @@ const Vocal = {
     /**
      * Lit une cote spécifique
      */
-    lireCote(cote, rampant, index, total) {
+    lireCote(cote, rampant, index, total, onEnd = null) {
         if (!this.verifierDisponibilite()) return;
 
         window.speechSynthesis.cancel(); // Arrête toute lecture en cours
@@ -61,9 +61,16 @@ const Vocal = {
             utterance.voice = frenchVoice;
         }
 
+        // Callback à la fin de la lecture
+        if (onEnd) {
+            utterance.onend = onEnd;
+        }
+
         console.log('🔊 Lecture:', texte);
 
         window.speechSynthesis.speak(utterance);
+        
+        return utterance;
     },
 
     /**
@@ -92,16 +99,20 @@ const Vocal = {
             nomRampant = 'pureau-dicte';
         }
 
-        // Lire la première cote
+        // Lire la première cote avec callback pour démarrer la reconnaissance après
         this.lireCote(
             tracage[0],
             nomRampant,
             1,
-            tracage.length
+            tracage.length,
+            () => {
+                // Démarrer la reconnaissance vocale APRÈS la fin de la lecture
+                console.log('✅ Lecture terminée, démarrage reconnaissance vocale');
+                setTimeout(() => {
+                    this.demarrerReconnaissance(callback);
+                }, 500); // Délai de 500ms pour être sûr
+            }
         );
-
-        // Démarrer la reconnaissance vocale
-        this.demarrerReconnaissance(callback);
     },
 
     /**

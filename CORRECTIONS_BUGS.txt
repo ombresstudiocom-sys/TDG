@@ -1,0 +1,73 @@
+═══════════════════════════════════════════════════════════
+   FACTIS - Corrections bugs vocaux et formulaire
+═══════════════════════════════════════════════════════════
+
+✅ CORRECTIONS APPLIQUÉES
+
+═══════════════════════════════════════════════════════════
+
+🎤 BUG VOCAL CORRIGÉ (Mobile Chrome)
+═══════════════════════════════════════════════════════════
+
+Problème : Le micro s'activait pendant que la voix parlait,
+          captait sa propre voix et répétait en boucle
+
+Solution : 
+- La reconnaissance vocale démarre APRÈS la fin de la synthèse
+- Délai de 500ms pour sécuriser
+- Utilisation de l'événement onEnd de SpeechSynthesisUtterance
+
+Impact : Les commandes vocales fonctionnent maintenant correctement
+         sur mobile !
+
+═══════════════════════════════════════════════════════════
+
+📝 PREMIER RANG = 0 AUTORISÉ
+═══════════════════════════════════════════════════════════
+
+Problème : Impossible de mettre 0 dans "Premier rang"
+
+Solution :
+- Validation modifiée : premierRang >= 0 (au lieu de > 0)
+- HTML : min="0" ajouté sur le champ
+
+Impact : On peut maintenant calculer avec premier rang = 0
+         (cas où on commence directement au pureau)
+
+═══════════════════════════════════════════════════════════
+
+📦 FICHIERS MODIFIÉS (3)
+═══════════════════════════════════════════════════════════
+
+1. vocal.js
+   → Ajout callback onEnd dans lireCote()
+   → Démarrage reconnaissance APRÈS fin de synthèse
+   → Délai de sécurité 500ms
+
+2. pureau-dicte.js
+   → Validation premierRang >= 0 (autorise 0)
+   → Validation séparée pour champs > 0
+
+3. pureau-dicte-ui.js
+   → Attribut min="0" sur input premier rang
+
+═══════════════════════════════════════════════════════════
+
+🧪 TESTS RECOMMANDÉS
+═══════════════════════════════════════════════════════════
+
+✅ Sur mobile Chrome :
+   - Lancer lecture vocale
+   - Dire "suivante" → doit passer à la cote suivante
+   - Dire "retour" → doit revenir en arrière
+   - Dire "relire" → doit répéter la cote
+   - Dire "stop" → doit arrêter
+
+✅ Formulaire pureau dicté :
+   - Mettre 0 dans "Premier rang"
+   - Calculer
+   - Vérifier résultat : 1ère cote = 0 + pureau
+
+═══════════════════════════════════════════════════════════
+
+© 2025 CHAPEL - SARL Toitures Des Garrigues 34160

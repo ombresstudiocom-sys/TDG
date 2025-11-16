@@ -66,9 +66,19 @@ const CalculateurPureauxDicte = {
             params.nomChantier = 'Chantier du ' + new Date().toLocaleDateString('fr-FR');
         }
 
-        const champs = ['premierRang', 'pureau', 'nombreRangs'];
+        // Validation du premier rang (peut être 0)
+        if (params.premierRang === undefined || params.premierRang === null || 
+            isNaN(params.premierRang) || params.premierRang < 0) {
+            return {
+                valide: false,
+                message: 'Le premier rang doit être un nombre positif ou zéro'
+            };
+        }
+
+        // Validation des autres champs (doivent être > 0)
+        const champsPositifs = ['pureau', 'nombreRangs'];
         
-        for (const champ of champs) {
+        for (const champ of champsPositifs) {
             if (!params[champ] || isNaN(params[champ]) || params[champ] <= 0) {
                 return {
                     valide: false,
