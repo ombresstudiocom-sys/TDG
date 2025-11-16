@@ -35,33 +35,52 @@ function renderPagePureauxDicte() {
 // FORMULAIRE
 // ========================================
 function renderFormulairePureauxDicte() {
+    // Récupérer les valeurs du chantier repris s'il existe
+    const chantier = AppState.chantierPureauxDicteRepris;
+    const valeurs = chantier ? {
+        nomChantier: chantier.nomChantier + ' (copie)',
+        premierRang: chantier.premierRang,
+        pureau: chantier.pureau,
+        nombreRangs: chantier.nombreRangs
+    } : {
+        nomChantier: '',
+        premierRang: '',
+        pureau: '',
+        nombreRangs: ''
+    };
+    
+    // Réinitialiser le chantier repris après utilisation
+    if (chantier) {
+        AppState.chantierPureauxDicteRepris = null;
+    }
+    
     return `
         <div class="${getThemeClass('card')}">
             <h3 class="${getTextClass()} mb-4">Nouveau calcul</h3>
             
             <form id="form-pureau-dicte" onsubmit="return false;">
                 <div class="form-group">
-                    <label class="${getThemeClass('form-label')}">Nom du chantier *</label>
+                    <label class="${getThemeClass('form-label')}">Nom du chantier (optionnel)</label>
                     <input type="text" id="pd-nom-chantier" class="${getThemeClass('form-input')}" 
-                           placeholder="Ex: Chantier Dupont" required>
+                           placeholder="Ex: Chantier Dupont" value="${valeurs.nomChantier}">
                 </div>
 
                 <div class="form-group">
                     <label class="${getThemeClass('form-label')}">Espacement du premier rang / Épaisseur du liteau d'accroche (cm) *</label>
                     <input type="number" id="pd-premier-rang" class="${getThemeClass('form-input')}" 
-                           placeholder="Ex: 4" step="0.1" required>
+                           placeholder="Ex: 4" step="0.1" required value="${valeurs.premierRang}">
                 </div>
 
                 <div class="form-group">
                     <label class="${getThemeClass('form-label')}">Pureau (cm) *</label>
                     <input type="number" id="pd-pureau" class="${getThemeClass('form-input')}" 
-                           placeholder="Ex: 35" step="0.1" required>
+                           placeholder="Ex: 35" step="0.1" required value="${valeurs.pureau}">
                 </div>
 
                 <div class="form-group">
                     <label class="${getThemeClass('form-label')}">Nombre de rangs *</label>
                     <input type="number" id="pd-nombre-rangs" class="${getThemeClass('form-input')}" 
-                           placeholder="Ex: 10" min="1" max="100" required>
+                           placeholder="Ex: 10" min="1" max="100" required value="${valeurs.nombreRangs}">
                 </div>
 
                 <button type="button" class="btn btn-primary btn-full" onclick="lancerCalculPureauxDicte()">
@@ -287,10 +306,8 @@ function supprimerChantierPureauxDicte(id) {
 }
 
 function reprendreChantierPureauxDicte(chantier) {
-    document.getElementById('pd-nom-chantier').value = chantier.nomChantier + ' (copie)';
-    document.getElementById('pd-premier-rang').value = chantier.premierRang;
-    document.getElementById('pd-pureau').value = chantier.pureau;
-    document.getElementById('pd-nombre-rangs').value = chantier.nombreRangs;
-
+    // Stocker les données dans AppState pour les récupérer après le render
+    AppState.chantierPureauxDicteRepris = chantier;
+    
     naviguerVers('menu-outils', 'pureau-dicte');
 }

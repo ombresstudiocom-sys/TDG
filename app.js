@@ -25,7 +25,8 @@ const AppState = {
     mesChantiersPureauxDicte: [],
     tuileSelectionnee: null,
     tuileEnEdition: null,
-    resultatPureauxDicte: null
+    resultatPureauxDicte: null,
+    chantierPureauxDicteRepris: null
 };
 
 // ========================================

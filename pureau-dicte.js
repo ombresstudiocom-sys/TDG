@@ -61,11 +61,9 @@ const CalculateurPureauxDicte = {
      * Validation des entrées
      */
     validerEntrees(params) {
+        // Si pas de nom de chantier, utiliser une valeur par défaut
         if (!params.nomChantier || params.nomChantier.trim() === '') {
-            return {
-                valide: false,
-                message: 'Le nom du chantier est requis'
-            };
+            params.nomChantier = 'Chantier du ' + new Date().toLocaleDateString('fr-FR');
         }
 
         const champs = ['premierRang', 'pureau', 'nombreRangs'];
