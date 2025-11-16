@@ -39,17 +39,27 @@ const Vocal = {
 
         window.speechSynthesis.cancel(); // Arrête toute lecture en cours
 
-        let texte;
-        if (rampant === 'pureau-dicte') {
-            texte = `Cote ${cote} centimètres. Cote ${index} sur ${total}`;
-        } else {
-            texte = `${rampant}, cote ${cote} centimètres. Cote ${index} sur ${total}`;
-        }
+        // Remplacer le point par "virgule" pour une meilleure prononciation
+        const coteFormatee = cote.toString().replace('.', ' virgule ');
+        
+        // Format fluide : "Cote X virgule Y cm, je répète, X virgule Y cm"
+        const texte = `Cote ${coteFormatee} centimètres, je répète, ${coteFormatee} centimètres`;
         
         const utterance = new SpeechSynthesisUtterance(texte);
         utterance.lang = 'fr-FR';
-        utterance.rate = 0.9; // Vitesse légèrement ralentie pour clarté
+        utterance.rate = 0.85; // Un peu plus lent pour la clarté
         utterance.pitch = 1.0;
+        
+        // Essayer de sélectionner une voix française plus naturelle
+        const voices = window.speechSynthesis.getVoices();
+        const frenchVoice = voices.find(voice => 
+            voice.lang.startsWith('fr') && 
+            (voice.name.includes('Google') || voice.name.includes('Enhanced') || voice.name.includes('Premium'))
+        ) || voices.find(voice => voice.lang.startsWith('fr'));
+        
+        if (frenchVoice) {
+            utterance.voice = frenchVoice;
+        }
 
         console.log('🔊 Lecture:', texte);
 
