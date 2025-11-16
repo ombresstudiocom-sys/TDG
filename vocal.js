@@ -39,7 +39,13 @@ const Vocal = {
 
         window.speechSynthesis.cancel(); // Arrête toute lecture en cours
 
-        const texte = `${rampant}, cote ${cote} centimètres. Cote ${index} sur ${total}`;
+        let texte;
+        if (rampant === 'pureau-dicte') {
+            texte = `Cote ${cote} centimètres. Cote ${index} sur ${total}`;
+        } else {
+            texte = `${rampant}, cote ${cote} centimètres. Cote ${index} sur ${total}`;
+        }
+        
         const utterance = new SpeechSynthesisUtterance(texte);
         utterance.lang = 'fr-FR';
         utterance.rate = 0.9; // Vitesse légèrement ralentie pour clarté
@@ -66,10 +72,20 @@ const Vocal = {
 
         console.log('▶️ Démarrage lecture:', rampant, 'Cotes:', tracage.length);
 
+        // Déterminer le nom à lire
+        let nomRampant = rampant;
+        if (rampant === 'rampant1') {
+            nomRampant = 'Rampant 1';
+        } else if (rampant === 'rampant2') {
+            nomRampant = 'Rampant 2';
+        } else if (rampant === 'pureau-dicte') {
+            nomRampant = 'pureau-dicte';
+        }
+
         // Lire la première cote
         this.lireCote(
             tracage[0],
-            rampant === 'rampant1' ? 'Rampant 1' : 'Rampant 2',
+            nomRampant,
             1,
             tracage.length
         );
@@ -104,9 +120,13 @@ const Vocal = {
             this.indexCote++;
             console.log('➡️ Cote suivante:', this.indexCote);
             
+            let nomRampant = this.rampantActuel;
+            if (this.rampantActuel === 'rampant1') nomRampant = 'Rampant 1';
+            else if (this.rampantActuel === 'rampant2') nomRampant = 'Rampant 2';
+            
             this.lireCote(
                 this.tracage[this.indexCote],
-                this.rampantActuel === 'rampant1' ? 'Rampant 1' : 'Rampant 2',
+                nomRampant,
                 this.indexCote + 1,
                 this.tracage.length
             );
@@ -127,9 +147,13 @@ const Vocal = {
     repeterCote(callback) {
         console.log('🔁 Répétition cote:', this.indexCote);
         
+        let nomRampant = this.rampantActuel;
+        if (this.rampantActuel === 'rampant1') nomRampant = 'Rampant 1';
+        else if (this.rampantActuel === 'rampant2') nomRampant = 'Rampant 2';
+        
         this.lireCote(
             this.tracage[this.indexCote],
-            this.rampantActuel === 'rampant1' ? 'Rampant 1' : 'Rampant 2',
+            nomRampant,
             this.indexCote + 1,
             this.tracage.length
         );
@@ -145,9 +169,13 @@ const Vocal = {
             this.indexCote--;
             console.log('⬅️ Cote précédente:', this.indexCote);
             
+            let nomRampant = this.rampantActuel;
+            if (this.rampantActuel === 'rampant1') nomRampant = 'Rampant 1';
+            else if (this.rampantActuel === 'rampant2') nomRampant = 'Rampant 2';
+            
             this.lireCote(
                 this.tracage[this.indexCote],
-                this.rampantActuel === 'rampant1' ? 'Rampant 1' : 'Rampant 2',
+                nomRampant,
                 this.indexCote + 1,
                 this.tracage.length
             );
@@ -180,11 +208,11 @@ const Vocal = {
             console.log('🎤 Commande reconnue:', commande);
 
             // Traitement des commandes
-            if (commande.includes('suivant')) {
+            if (commande.includes('suivant') || commande.includes('suivante')) {
                 this.coteSuivante(callback);
-            } else if (commande.includes('répète') || commande.includes('répéter')) {
+            } else if (commande.includes('relire') || commande.includes('répète') || commande.includes('répéter')) {
                 this.repeterCote(callback);
-            } else if (commande.includes('avant') || commande.includes('précédent') || commande.includes('precedent')) {
+            } else if (commande.includes('retour') || commande.includes('avant') || commande.includes('précédent') || commande.includes('precedent')) {
                 this.cotePrecedente(callback);
             } else if (commande.includes('stop') || commande.includes('arrêt') || commande.includes('arret')) {
                 this.arreterLecture();

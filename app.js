@@ -22,8 +22,10 @@ const AppState = {
     modeSombre: false,
     mesTuiles: [],
     mesChantiers: [],
+    mesChantiersPureauxDicte: [],
     tuileSelectionnee: null,
-    tuileEnEdition: null
+    tuileEnEdition: null,
+    resultatPureauxDicte: null
 };
 
 // ========================================
@@ -43,6 +45,7 @@ async function initApp() {
     AppState.modeSombre = Storage.loadModeSombre();
     AppState.mesTuiles = Storage.loadTuiles();
     AppState.mesChantiers = Storage.loadChantiers();
+    AppState.mesChantiersPureauxDicte = Storage.loadChantiersPureauxDicte();
 
     // Charger les données depuis les fichiers Excel
     await chargerDonneesExcel();
@@ -216,7 +219,13 @@ function render() {
     if (AppState.page === 'accueil') {
         contenu = renderPageAccueil();
     } else if (AppState.page === 'menu-outils') {
-        contenu = renderPageMenuOutils();
+        if (!AppState.sousPage) {
+            contenu = renderPageMenuOutils();
+        } else if (AppState.sousPage === 'pureau-dicte') {
+            contenu = renderPagePureauxDicte();
+        } else if (AppState.sousPage === 'historique-pureau-dicte') {
+            contenu = renderPageHistoriquePureauxDicte();
+        }
     } else if (AppState.page === 'menu-calculateur') {
         if (!AppState.sousPage) {
             contenu = renderPageMenuCalculateur();
@@ -349,6 +358,7 @@ function renderPageAccueil() {
 function renderPageMenuOutils() {
     const outils = [
         { icon: 'calculator', color: 'green', titre: 'Calculateur de pureau', desc: 'Calcul précis du pureau', page: 'menu-calculateur' },
+        { icon: 'wrench', color: 'blue', titre: 'Pureau Dicté', desc: 'Génération de cotes avec pureau fixe', page: 'menu-outils', sousPage: 'pureau-dicte' },
         { icon: 'trending-up', color: 'green', titre: 'Calcul degré en pourcentage', desc: 'Conversion degré ↔ %', page: 'conversion-degres' },
         { icon: 'save', color: 'purple', titre: 'Chantiers sauvegardés', desc: `${AppState.mesChantiers.length} chantier(s)`, page: 'chantiers' }
     ];
@@ -364,7 +374,7 @@ function renderPageMenuOutils() {
 
             <div class="grid grid-2">
                 ${outils.map(outil => `
-                    <button class="${getThemeClass('card')} ${getThemeClass('card-app')} card-button card-clickable" onclick="naviguerVers('${outil.page}')">
+                    <button class="${getThemeClass('card')} ${getThemeClass('card-app')} card-button card-clickable" onclick="naviguerVers('${outil.page}'${outil.sousPage ? ", '" + outil.sousPage + "'" : ''})">
                         <div class="card-icon-wrapper">
                             ${icon(outil.icon, 'icon-xl text-' + outil.color)}
                         </div>

@@ -235,6 +235,29 @@ function renderResultatRampant(nom, resultat, nombreRangsCommun) {
     return `
         <div class="${getThemeClass('card')} mt-4">
             <h3 class="${getTextClass()} mb-4">${nom}</h3>
+            <!-- Légende des commandes vocales -->
+            <div class="${getThemeClass('result-section')} mb-4">
+                <h4 class="${getTextClass()} mb-2">🎤 Commandes vocales</h4>
+                <div class="grid-cols-2 grid gap-2">
+                    <div>
+                        <span class="badge badge-blue">Suivante</span>
+                        <span class="${getMutedClass()} text-sm"> - Cote suivante</span>
+                    </div>
+                    <div>
+                        <span class="badge badge-blue">Retour</span>
+                        <span class="${getMutedClass()} text-sm"> - Cote précédente</span>
+                    </div>
+                    <div>
+                        <span class="badge badge-blue">Relire</span>
+                        <span class="${getMutedClass()} text-sm"> - Répéter la cote</span>
+                    </div>
+                    <div>
+                        <span class="badge badge-blue">Stop</span>
+                        <span class="${getMutedClass()} text-sm"> - Arrêter</span>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="${getThemeClass('result-section')}">
                 <div class="result-grid">

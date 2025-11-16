@@ -59,11 +59,27 @@ const Storage = {
     },
 
     /**
+     * Sauvegarde les chantiers pureau dicté
+     */
+    saveChantiersPureauxDicte(chantiers) {
+        localStorage.setItem('mes-chantiers-pureau-dicte', JSON.stringify(chantiers));
+    },
+
+    /**
+     * Charge les chantiers pureau dicté
+     */
+    loadChantiersPureauxDicte() {
+        const saved = localStorage.getItem('mes-chantiers-pureau-dicte');
+        return saved ? JSON.parse(saved) : [];
+    },
+
+    /**
      * Efface toutes les données (pour debug)
      */
     clearAll() {
         localStorage.removeItem('modeSombre');
         localStorage.removeItem('mes-tuiles');
         localStorage.removeItem('mes-chantiers');
+        localStorage.removeItem('mes-chantiers-pureau-dicte');
     }
 };

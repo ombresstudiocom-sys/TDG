@@ -1,0 +1,105 @@
+═══════════════════════════════════════════════════════════
+   FACTIS - Mise à jour "Pureau Dicté"
+═══════════════════════════════════════════════════════════
+
+✅ AJOUT TERMINÉ !
+
+═══════════════════════════════════════════════════════════
+
+📦 FICHIERS MODIFIÉS (6 fichiers à remplacer)
+═══════════════════════════════════════════════════════════
+
+1. 🔄 index.html
+   → Ajout des scripts pureau-dicte.js et pureau-dicte-ui.js
+
+2. 🔄 app.js
+   → Ajout du bouton "Pureau Dicté" dans le menu outils
+   → Ajout des états pour le pureau dicté (resultatPureauxDicte, mesChantiersPureauxDicte)
+   → Gestion du routing vers les pages pureau-dicte
+
+3. 🔄 storage.js
+   → Ajout saveChantiersPureauxDicte() et loadChantiersPureauxDicte()
+
+4. 🔄 vocal.js
+   → Adaptation pour lecture "pureau-dicte"
+   → Mise à jour commandes vocales : "Suivante", "Retour", "Relire", "Stop"
+
+5. 🔄 calculateur-ui.js
+   → Ajout légende des commandes vocales dans le calculateur de pureau
+
+═══════════════════════════════════════════════════════════
+
+📦 NOUVEAUX FICHIERS (2 fichiers à ajouter)
+═══════════════════════════════════════════════════════════
+
+6. ✨ pureau-dicte.js
+   → Moteur de calcul isolé pour pureau dicté
+   → Génère des cotes : Premier rang + Pureau, puis on ajoute pureau à chaque fois
+
+7. ✨ pureau-dicte-ui.js
+   → Interface complète du pureau dicté
+   → Formulaire, résultats, historique séparé, lecture vocale
+
+═══════════════════════════════════════════════════════════
+
+🎯 NOUVEAU CALCULATEUR "PUREAU DICTÉ"
+═══════════════════════════════════════════════════════════
+
+Accessible depuis : Outils de calcul → Pureau Dicté
+
+Formulaire :
+- Nom du chantier
+- Espacement du premier rang / Épaisseur du liteau (cm)
+- Pureau (cm)
+- Nombre de rangs
+
+Résultats :
+- Calcul : 1ère cote = Premier rang + Pureau
+           Cotes suivantes = Cote précédente + Pureau
+- Affichage avec max 1 chiffre après la virgule
+- Lecture vocale avec commandes
+- Sauvegarde séparée des chantiers
+- Historique dédié (bouton en haut)
+
+Exemple :
+Premier rang: 4 cm, Pureau: 35 cm, 10 rangs
+→ 39.0 - 74.0 - 109.0 - 144.0 - 179.0 - 214.0 - 249.0 - 284.0 - 319.0 - 354.0
+
+═══════════════════════════════════════════════════════════
+
+🎤 COMMANDES VOCALES (mises à jour)
+═══════════════════════════════════════════════════════════
+
+✅ Calculateur de pureau ET Pureau Dicté :
+- "Suivante" → Cote suivante
+- "Retour" → Cote précédente  
+- "Relire" → Répéter la cote actuelle
+- "Stop" → Arrêter la lecture
+
+✅ Légende ajoutée dans l'interface des deux calculateurs
+
+═══════════════════════════════════════════════════════════
+
+📂 ARCHITECTURE
+═══════════════════════════════════════════════════════════
+
+Pureau Dicté est TOTALEMENT ISOLÉ comme le calculateur de pureau :
+
+pureau-dicte.js → Logique de calcul (indépendant)
+pureau-dicte-ui.js → Interface (indépendant)
+
+Pas d'impact sur le reste de l'application !
+
+═══════════════════════════════════════════════════════════
+
+✅ INSTALLATION
+═══════════════════════════════════════════════════════════
+
+1. Remplacer les 5 fichiers modifiés
+2. Ajouter les 2 nouveaux fichiers
+3. Ouvrir l'application
+4. Tester : Outils de calcul → Pureau Dicté
+
+═══════════════════════════════════════════════════════════
+
+© 2025 CHAPEL - SARL Toitures Des Garrigues 34160
